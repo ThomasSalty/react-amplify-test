@@ -1,0 +1,403 @@
+https://www.linkedin.com/learning/build-a-react-application-using-aws-amplify
+
+
+Lépések:
+
+
+1, AMPLIFY CLI telepítése
+-----------------------------------------------------------------------------------------
+
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects                         [17:49]
+    ❯ npm i -g @aws-amplify/cli
+
+    npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+    npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+    npm WARN deprecated event-to-promise@0.8.0: Use promise-toolbox/fromEvent instead
+    npm WARN deprecated querystring@0.2.0: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
+    npm WARN deprecated graphql-import@0.7.1: GraphQL Import has been deprecated and merged into GraphQL Tools, so it will no longer get updates. Use GraphQL Tools instead to stay up-to-date! Check out https://www.graphql-tools.com/docs/migration-from-import for migration and https://the-guild.dev/blog/graphql-tools-v6 for new changes.
+    npm WARN deprecated uuid@3.4.0: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    npm WARN deprecated @graphql-toolkit/common@0.9.7: GraphQL Toolkit is deprecated and merged into GraphQL Tools, so it will no longer get updates. Use GraphQL Tools instead to stay up-to-date! Check out https://www.graphql-tools.com/docs/migration-from-toolkit for migration and https://the-guild.dev/blog/graphql-tools-v6 for new changes.
+    npm WARN deprecated @graphql-toolkit/common@0.9.7: GraphQL Toolkit is deprecated and merged into GraphQL Tools, so it will no longer get updates. Use GraphQL Tools instead to stay up-to-date! Check out https://www.graphql-tools.com/docs/migration-from-toolkit for migration and https://the-guild.dev/blog/graphql-tools-v6 for new changes.
+    npm WARN deprecated uuid@3.3.2: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    npm WARN deprecated @graphql-toolkit/common@0.6.6: GraphQL Toolkit is deprecated and merged into GraphQL Tools, so it will no longer get updates. Use GraphQL Tools instead to stay up-to-date! Check out https://www.graphql-tools.com/docs/migration-from-toolkit for migration and https://the-guild.dev/blog/graphql-tools-v6 for new changes.
+    npm WARN deprecated graphql-tools@4.0.8: This package has been deprecated and now it only exports makeExecutableSchema.\nAnd it will no longer receive updates.\nWe recommend you to migrate to scoped packages such as @graphql-tools/schema, @graphql-tools/utils and etc.\nCheck out https://www.graphql-tools.com to learn what package you should use instead
+    npm WARN deprecated core-js@2.6.12: core-js@<3.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+    npm WARN deprecated core-js@2.6.12: core-js@<3.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+    npm WARN deprecated core-js@2.6.12: core-js@<3.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Please, upgrade your dependencies to the actual version of core-js.
+
+    added 1548 packages, and audited 1560 packages in 4m
+
+    51 packages are looking for funding
+    run `npm fund` for details
+
+    43 vulnerabilities (16 low, 6 moderate, 20 high, 1 critical)
+
+    To address issues that do not require attention, run:
+    npm audit fix
+
+    To address all issues (including breaking changes), run:
+    npm audit fix --force
+
+    Run `npm audit` for details.
+
+
+=========================================================================================
+
+2, Telepítve lett az Amplify CLI?
+-----------------------------------------------------------------------------------------
+
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                         [17:57]
+    ❯ amplify
+
+    amplify <command> <subcommand>
+
+    init                         Initializes a new project, sets up deployment resources in the cloud, and makes your project ready for Amplify.
+
+    configure                    Configures the attributes of your project for amplify-cli, such as switching front-end framework and adding/removing cloud-provider plugins.
+    push                         Provisions cloud resources with the latest local developments.
+
+    pull                         Fetch upstream backend environment definition changes from the cloud and updates the local environment to match that definition.
+    publish                      Executes amplify push, and then builds and publishes client-side application for hosting.
+
+    serve                        Executes amplify push, and then executes the project's start command to test run the client-side application locally.
+
+    status [<category> ...]      Shows the state of local resources not yet pushed to the cloud (Create/Update/Delete).
+
+    status -v [<category> ...]   Shows the detailed verbose diff between local and deployed resources, including cloudformation-diff
+
+    delete                       Deletes all of the resources tied to the project from the cloud.
+
+    <category> add               Adds a resource for an Amplify category in your local backend
+
+    <category> update            Update resource for an Amplify category in your local backend.
+
+    <category> push              Provisions all cloud resources in a category with the latest local developments.
+
+    <category> remove            Removes a resource for an Amplify category in your local backend.
+
+    <category>                   Displays subcommands of the specified Amplify category.
+
+    mock                         Run mock server for testing categories locally.
+
+    codegen                      Generates GraphQL statements(queries, mutations and eventHandlers) and type annotations.
+
+    env                          Displays and manages environment related information for your Amplify project.
+
+    console                      Opens the web console for the selected cloud resource.
+
+    logout                       If using temporary cloud provider credentials, this logs out of the account.
+
+
+    where <category> is one of: notifications, analytics, function, geo, hosting, interactions, predictions, xr, api, auth, custom, storage
+
+
+====================================================================================
+https://www.trendmicro.com/cloudoneconformity/knowledge-base/aws/IAM/admin-permissions.html
+
+
+3, Admin jogom van az IAM account-omon?
+
+- Megtudhatom a console-ból:
+    https://console.aws.amazon.com/iam/home#/users/tamassoos
+
+
+- Vagy cli-ből is:
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                         [17:58]
+    ❯ aws --version
+    aws-cli/2.4.2 Python/3.8.8 Windows/10 exe/AMD64 prompt/off
+
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                             [18:09]
+    ❯ aws iam list-users
+    {
+        "Users": [
+            {
+                "Path": "/",
+                "UserName": "tamassoos",
+                "UserId": "AIDATFFPLBQ2LW52T3XD7",
+                "Arn": "arn:aws:iam::217263574068:user/tamassoos",
+                "CreateDate": "2021-11-26T16:08:58+00:00",
+                "PasswordLastUsed": "2021-12-14T16:30:01+00:00"
+            }
+        ]
+    }
+
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                             [18:09]
+    ❯ aws iam list-users --output table
+    --------------------------------------------------------------------
+    |                             ListUsers                            |
+    +------------------------------------------------------------------+
+    ||                              Users                             ||
+    |+-------------------+--------------------------------------------+|
+    ||  Arn              |  arn:aws:iam::217263574068:user/tamassoos  ||
+    ||  CreateDate       |  2021-11-26T16:08:58+00:00                 ||
+    ||  PasswordLastUsed |  2021-12-14T16:30:01+00:00                 ||
+    ||  Path             |  /                                         ||
+    ||  UserId           |  AIDATFFPLBQ2LW52T3XD7                     ||
+    ||  UserName         |  tamassoos                                 ||
+    |
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                             [18:09]
+    ❯ aws iam list-users --output table --query 'Users[*].UserName'
+    ---------------
+    |  ListUsers  |
+    +-------------+
+    |  tamassoos  |
+    +-------------+
+
+
+    - Ez csak a saját jogait mutatja, amit a group-ból kap azt nem:
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                             [18:10]
+    ❯ aws iam list-attached-user-policies --user-name tamassoos
+    {
+        "AttachedPolicies": [
+            {
+                "PolicyName": "IAMUserChangePassword",
+                "PolicyArn": "arn:aws:iam::aws:policy/IAMUserChangePassword"
+            }
+        ]
+    }
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                             [18:11]
+    ❯ aws iam get-policy --policy-arn "arn:aws:iam::aws:policy/IAMUserChangePassword"
+    {
+        "Policy": {
+            "PolicyName": "IAMUserChangePassword",
+            "PolicyId": "ANPAJ4L4MM2A7QIEB56MS",
+            "Arn": "arn:aws:iam::aws:policy/IAMUserChangePassword",
+            "Path": "/",
+            "DefaultVersionId": "v2",
+            "AttachmentCount": 1,
+            "PermissionsBoundaryUsageCount": 0,
+            "IsAttachable": true,
+            "Description": "Provides the ability for an IAM user to change their own password.",
+            "CreateDate": "2016-11-15T00:25:16+00:00",
+            "UpdateDate": "2016-11-15T23:18:55+00:00",
+            "Tags": []
+        }
+    }
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                             [18:12]
+    ❯ aws iam get-policy --policy-arn "arn:aws:iam::aws:policy/IAMUserChangePassword" --query 'Policy.DefaultVersionId'
+    "v2"
+
+
+    - Melyik group-ba tartozik ez a user?
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects                                                                                                     [18:23]
+    ❯ aws iam list-groups-for-user --user-name tamassoos
+    {
+        "Groups": [
+            {
+                "Path": "/",
+                "GroupName": "admins",
+                "GroupId": "AGPATFFPLBQ2BAHCC3EIQ",
+                "Arn": "arn:aws:iam::217263574068:group/admins",
+                "CreateDate": "2021-11-26T16:04:36+00:00"
+            }
+        ]
+    }
+
+
+    - Annak a group-nak milyen jogai vannak?
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects                                                                                                     [18:22]
+    ❯ aws iam list-attached-group-policies --group-name admins
+    {
+        "AttachedPolicies": [
+            {
+                "PolicyName": "AdministratorAccess",
+                "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+            }
+        ]
+    }
+
+
+====================================================================================================
+
+4. Konfiguráljuk (ez megnyitja a böngészőben az aws console-t):
+----------------------------------------------------------------
+
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\Build-a-React-Application-Using-AWS-Amplify                                                       [18:19]
+    ❯ amplify configure
+
+    Follow these steps to set up access to your AWS account:
+
+    Sign in to your AWS administrator account:
+    https://console.aws.amazon.com/
+    Press Enter to continue
+
+    - Itt enter-t nyomunk miután beléptünk az admin jogú IAM account-unkba:
+
+
+    Specify the AWS Region
+    ? region:  us-east-2
+    Specify the username of the new IAM user:
+    ? user name:  amplify-tamassoos
+    Complete the user creation using the AWS console
+    https://console.aws.amazon.com/iam/home?region=us-east-2#/users$new?step=final&accessKey&userNames=amplify-tamassoos&permissionType=policies&policies=arn:aws:iam::aws:policy%2FAdministratorAccess
+    Press Enter to continue
+
+    - Itt megint megnyitja a böngészőt, ahol hozzá kell adni ezt az új user-t (amplify-tamassoos)
+    Ott a nevünk alapból ki van töltve és a Programmatic Access alapból be van pipálva.
+    Tovább megyünk a Permissions-re, ott látjuk az AdministratorAccess be van pipálva, nem változtatunk semmit.
+    A tag-eknél nem kötelező, de hozzáadjuk key-nek ezt: Purpose. Value: LinkedIn React and Amplify course.
+    Ezután Review és Create User.
+
+    - Ezután ezt írja ki az aws console:
+
+    "Success
+    You successfully created the users shown below. You can view and download user security credentials.
+    You can also email users instructions for signing in to the AWS Management Console.
+    This is the last time these credentials will be available to download.
+    However, you can create new credentials at any time.
+
+    Users with AWS Management Console access can sign-in at: https://217263574068.signin.aws.amazon.com/console"
+
+    - És ott van a "amplify-tamassoos" nevű user, meg a hozzátartozó "Access key ID" és "Secret access key".
+    - Ezeket lementettem keepass-ba és nyomtam egy Enter-t a terminálban.
+
+
+    Enter the access key of the newly created user:
+    ? accessKeyId:  ********************
+    ? secretAccessKey:  ****************************************
+    This would update/create the AWS Profile in your local machine
+    ? Profile Name:  amplify
+
+    Successfully set up the new user.
+
+
+====================================================================================================
+
+5. Create React App:
+----------------------------------------------------------------
+
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\build-a-react-application-using-aws-amplify                                                           [10:21]
+    ❯ npx create-react-app .
+
+    Creating a new React app in C:\code\Projects\build-a-react-application-using-aws-amplify.
+
+    Installing packages. This might take a couple of minutes.
+    Installing react, react-dom, and react-scripts with cra-template...
+
+    ... még sok minden van.
+
+
+
+====================================================================================================
+
+6. Connect this project to our AWS configuration:
+----------------------------------------------------------------
+
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\build-a-react-application-using-aws-amplify   master ≢                                                [10:25]
+    ❯ amplify init
+    Note: It is recommended to run this command from the root of your app directory
+    ? Enter a name for the project buildareactapplicati
+    The following configuration will be applied:
+
+    Project information
+    | Name: buildareactapp
+    | Environment: dev
+    | Default editor: Visual Studio Code
+    | App type: javascript
+    | Javascript framework: react
+    | Source Directory Path: src
+    | Distribution Directory Path: build
+    | Build Command: npm.cmd run-script build
+    | Start Command: npm.cmd run-script start
+
+    ? Initialize the project with the above configuration? Yes
+    Using default provider  awscloudformation
+    ? Select the authentication method you want to use: AWS profile
+
+    For more information on AWS Profiles, see:
+    https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html
+
+    ? Please choose the profile you want to use amplify
+    Adding backend environment dev to AWS Amplify app: d2ij0satn0z00i
+    / Initializing project in the cloud...
+
+    CREATE_IN_PROGRESS amplify-buildareactapplicati-dev-103631 AWS::CloudFormation::Stack Wed Dec 15 2021 10:36:37 GMT+0100 (Central European Standard Time) User Initiated
+    CREATE_IN_PROGRESS AuthRole                                AWS::IAM::Role             Wed Dec 15 2021 10:36:41 GMT+0100 (Central European Standard Time)
+
+    CREATE_IN_PROGRESS DeploymentBucket                        AWS::S3::Bucket            Wed Dec 15 2021 10:36:41 GMT+0100 (Central European Standard Time)
+
+    CREATE_IN_PROGRESS UnauthRole                              AWS::IAM::Role             Wed Dec 15 2021 10:36:41 GMT+0100 (Central European Standard Time)
+
+    CREATE_IN_PROGRESS AuthRole                                AWS::IAM::Role             Wed Dec 15 2021 10:36:42 GMT+0100 (Central European Standard Time) Resource creation Initiated
+    CREATE_IN_PROGRESS UnauthRole                              AWS::IAM::Role             Wed Dec 15 2021 10:36:42 GMT+0100 (Central European Standard Time) Resource creation Initiated
+    CREATE_IN_PROGRESS DeploymentBucket                        AWS::S3::Bucket            Wed Dec 15 2021 10:36:42 GMT+0100 (Central European Standard Time) Resource creation Initiated
+    / Initializing project in the cloud...
+
+    CREATE_COMPLETE AuthRole   AWS::IAM::Role Wed Dec 15 2021 10:36:55 GMT+0100 (Central European Standard Time)
+    CREATE_COMPLETE UnauthRole AWS::IAM::Role Wed Dec 15 2021 10:36:56 GMT+0100 (Central European Standard Time)
+    \ Initializing project in the cloud...
+
+    CREATE_COMPLETE DeploymentBucket AWS::S3::Bucket Wed Dec 15 2021 10:37:03 GMT+0100 (Central European Standard Time)
+    √ Successfully created initial AWS cloud resources for deployments.
+
+
+    CREATE_COMPLETE amplify-buildareactapplicati-dev-103631 AWS::CloudFormation::Stack Wed Dec 15 2021 10:37:05 GMT+0100 (Central European Standard Time)
+    √ Initialized provider successfully.
+    Initialized your environment successfully.
+
+    Your project has been successfully initialized and connected to the cloud!
+
+    Some next steps:
+    "amplify status" will show you what you've added already and if it's locally configured or deployed
+    "amplify add <category>" will allow you to add features like user login or a backend API
+    "amplify push" will build all your local backend resources and provision it in the cloud
+    "amplify console" to open the Amplify Console and view your project status
+    "amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+    Pro tip:
+    Try "amplify add api" to create a backend API and then "amplify publish" to deploy everything
+
+
+    
+====================================================================================================
+
+7. Install aws-amplify for react as an admin user:
+----------------------------------------------------------------
+
+    ⚡ Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\build-a-react-application-using-aws-amplify   master ≢ +2 ~2 -0 !                                     [11:33]
+    ❯ npm install aws-amplify @aws-amplify/ui-react
+
+    ... sok minden van.
+
+
+====================================================================================================
+
+8. Add these lines to src/index.js:
+----------------------------------------------------------------
+
+    import Amplify from "aws-amplify";
+    import awsconfig from "./aws-exports";
+
+    Amplify.configure(awsconfig);
+
+
+====================================================================================================
+
+9. Add files and folder from downloaded ExerciseFiles/02_04 folder:
+--------------------------------------------------------------------
+
+- Copy everything, except for src/index.js.
+
+
+
+====================================================================================================
+
+10. Use AWS Cognito (always free) for authentication:
+--------------------------------------------------------------------
+
+- We want to be able to show the website to certain people
+    but we don't want it to be publicly available, so we're using authentication.
