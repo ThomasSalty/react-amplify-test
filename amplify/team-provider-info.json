@@ -10,6 +10,11 @@
       "StackName": "amplify-buildareactapplicati-dev-103631",
       "StackId": "arn:aws:cloudformation:us-east-2:217263574068:stack/amplify-buildareactapplicati-dev-103631/7fec8600-5d8a-11ec-adc4-0a1256045614",
       "AmplifyAppId": "d2ij0satn0z00i"
+    },
+    "categories": {
+      "auth": {
+        "buildareactapplicati26409bcb": {}
+      }
     }
   }
 }
