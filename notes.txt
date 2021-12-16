@@ -600,8 +600,11 @@ https://docs.amplify.aws/lib/auth/getting-started/q/platform/js/#option-1-use-pr
 You'll also notice the user and signOut are provided to the wrapped component."
 
 - App gets these 2 props (user, signOut) which can be used to implement the sign out button.
-- I added the following to Header.js:
+- I added the following to Header.js (+ some styles):
 
     <p>
         Hello {email} <button onClick={signOut}>Kijelentkezés</button>
     </p>
+
+- I also added some styles to index.css to style the login screen and changed 
+    "withAuthenticator" to "Authenticator" in App.js.
