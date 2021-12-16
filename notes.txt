@@ -400,4 +400,208 @@ https://www.trendmicro.com/cloudoneconformity/knowledge-base/aws/IAM/admin-permi
 --------------------------------------------------------------------
 
 - We want to be able to show the website to certain people
-    but we don't want it to be publicly available, so we're using authentication.
+but we don't want it to be publicly available, so we're using authentication.
+
+
+    Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\build-a-react-application-using-aws-amplify   master ≣                                               [14:34]
+    ❯ amplify add auth
+    Using service: Cognito, provided by: awscloudformation
+
+     The current configured provider is Amazon Cognito.
+
+     Do you want to use the default authentication and security configuration? Default configuration
+     Warning: you will not be able to edit these selections.
+     How do you want users to be able to sign in? Email
+     Do you want to configure advanced settings? No, I am done.
+    ✅ Successfully added auth resource buildareactapplicati26409bcb locally
+
+    ✅ Some next steps:
+    "amplify push" will build all your local backend resources and provision it in the cloud
+    "amplify publish" will build all your local backend and frontend resources (if you have hosting category added) and provision it in the cloud
+
+
+
+====================================================================================================
+
+11. Build local backend resources and provision them in the cloud:
+--------------------------------------------------------------------
+
+
+    Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\build-a-react-application-using-aws-amplify   master ≣ +1 ~2 -0 !                                        [14:39]
+    ❯ amplify push
+    √ Successfully pulled backend environment dev from the cloud.
+
+        Current Environment: dev
+
+    ┌──────────┬──────────────────────────────┬───────────┬───────────────────┐
+    │ Category │ Resource name                │ Operation │ Provider plugin   │
+    ├──────────┼──────────────────────────────┼───────────┼───────────────────┤
+    │ Auth     │ buildareactapplicati26409bcb │ Create    │ awscloudformation │
+    └──────────┴──────────────────────────────┴───────────┴───────────────────┘
+    ? Are you sure you want to continue? Yes
+    / Updating resources in the cloud. This may take a few minutes...
+
+    UPDATE_IN_PROGRESS amplify-buildareactapplicati-dev-103631 AWS::CloudFormation::Stack Wed Dec 15 2021 15:10:24 GMT+0100 (Central European Standard Time) User Initiated
+    CREATE_IN_PROGRESS UpdateRolesWithIDPFunctionRole          AWS::IAM::Role             Wed Dec 15 2021 15:10:28 GMT+0100 (Central European Standard Time)
+
+    CREATE_IN_PROGRESS authbuildareactapplicati26409bcb        AWS::CloudFormation::Stack Wed Dec 15 2021 15:10:28 GMT+0100 (Central European Standard Time)
+
+    ... még sok minden van.
+
+    CREATE_COMPLETE UpdateRolesWithIDPFunction AWS::Lambda::Function Wed Dec 15 2021 15:12:15 GMT+0100 (Central European Standard Time)
+    | Updating resources in the cloud. This may take a few minutes...
+
+    CREATE_IN_PROGRESS UpdateRolesWithIDPFunctionOutputs Custom::LambdaCallout Wed Dec 15 2021 15:12:17 GMT+0100 (Central European Standard Time)
+    - Updating resources in the cloud. This may take a few minutes...
+
+    CREATE_IN_PROGRESS UpdateRolesWithIDPFunctionOutputs Custom::LambdaCallout Wed Dec 15 2021 15:12:20 GMT+0100 (Central European Standard Time) Resource creation Initiated
+    CREATE_COMPLETE    UpdateRolesWithIDPFunctionOutputs Custom::LambdaCallout Wed Dec 15 2021 15:12:20 GMT+0100 (Central European Standard Time)
+
+    | Updating resources in the cloud. This may take a few minutes...
+
+    UPDATE_COMPLETE_CLEANUP_IN_PROGRESS amplify-buildareactapplicati-dev-103631 AWS::CloudFormation::Stack Wed Dec 15 2021 15:12:22 GMT+0100 (Central European Standard Time)
+    / Updating resources in the cloud. This may take a few minutes...
+
+    UPDATE_COMPLETE amplify-buildareactapplicati-dev-103631 AWS::CloudFormation::Stack Wed Dec 15 2021 15:12:23 GMT+0100 (Central European Standard Time)
+    √ All resources are updated in the cloud
+
+
+
+====================================================================================================
+
+12. Verify if authentication was added by Amplify:
+--------------------------------------------------------------------
+
+- Belépünk az aws console-be, ott rákeresünk a Cognito-ra, majd rányomunk a Manage User Pools gombra.
+- Ezután kiválasztjuk a "buildareactapplicati26409bcb_userpool_26409bcb-dev" nevűt.
+
+- Az index.js-ben korábban hozzáadtuk ezt az import-ot:
+
+    import awsconfig from "./aws-exports";
+
+
+- Ez a aws-exports.js fájl most már televan rakva Cognito-s ugyanazokkal a dolgokkal,
+    amiket a userpool-unkban is látunk.
+
+- Csekkoljuk a status-t is:
+
+    Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\build-a-react-application-using-aws-amplify   master ≣ +2 ~3 -0 !                                    [15:12]
+    ❯ amplify status
+
+        Current Environment: dev
+
+    ┌──────────┬──────────────────────────────┬───────────┬───────────────────┐
+    │ Category │ Resource name                │ Operation │ Provider plugin   │
+    ├──────────┼──────────────────────────────┼───────────┼───────────────────┤
+    │ Auth     │ buildareactapplicati26409bcb │ No Change │ awscloudformation │
+    └──────────┴──────────────────────────────┴───────────┴───────────────────┘
+
+
+    Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\build-a-react-application-using-aws-amplify   master ≣ +2 ~3 -0 !                                    [15:22]
+    ❯ amplify console
+    √ Which site do you want to open? · Console
+    https://us-east-2.console.aws.amazon.com/amplify/home?region=us-east-2#/d2ij0satn0z00i/YmFja2VuZA/dev
+
+
+====================================================================================================
+
+13. Add authentication to App.js:
+--------------------------------------------------------------------
+
+- Add these lines:
+
+    import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+
+    export default withAuthenticator(App);
+
+
+- These created 31 errors, all related to an issue with graphql: (this is just 1 of the 31)
+
+    "ERROR in ../../../node_modules/graphql/index.mjs 25:0-49
+    Module not found: Error: Can't resolve './version' in 'node_modules\graphql'
+    Did you mean 'version.js'?
+    BREAKING CHANGE: The request './version' failed to resolve only because it was resolved as fully specified
+    (probably because the origin is a '*.mjs' file or a '*.js' file where the package.json contains '"type": "module"').
+    The extension in the request is mandatory for it to be fully specified.
+    Add the extension to the request."
+
+- In the tutorial this issue didn't exist, since they used different versions of dependencies.
+
+- To solve it, I had to fix the webpack config, but since this app was bootstrapped with cra,
+    I can't manually edit the webpack.config.js file.
+
+- I installed a package:
+
+    Tamas_Soos@EPHUSZEW00D9  C:\code\Projects\build-a-react-application-using-aws-amplify   master ≣ +3 ~9 -0 !                                    [17:41]
+    ❯ npm i -D react-app-rewired
+
+    added 2 packages, and audited 2452 packages in 5s
+
+    176 packages are looking for funding
+      run `npm fund` for details
+
+    17 moderate severity vulnerabilities
+
+    To address issues that do not require attention, run:
+      npm audit fix
+
+    To address all issues (including breaking changes), run:
+      npm audit fix --force
+
+
+- Then added "config-overrides.js" to the project root where I had to add this rule:
+
+    {
+        test: /\.m?js/,
+        resolve: {
+            fullySpecified: false,
+        },
+    }
+
+
+- Finally, I had to change package.json to use react-rewired:
+
+    "scripts": {
+        "start": "react-app-rewired start --scripts-version react-scripts",
+        "build": "react-app-rewired build --scripts-version react-scripts",
+        "test": "react-app-rewired test --scripts-version react-scripts",
+        "eject": "react-scripts eject"
+    },
+
+
+- This solved the issue, but the styling was off so I added this line to App.js:
+
+    import "@aws-amplify/ui-react/styles.css";
+
+
+- With this, instead of the webpage we see the login screen.
+
+- I created an account with Rod10 and I got an email with a confirmation code,
+    and after I confirmed my account with the code, I got redirected to the webpage.
+
+
+
+
+====================================================================================================
+
+14. Add sign out button:
+--------------------------------------------------------------------
+
+- Previously, we added this line to App.js:
+    import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+
+- Where "AmplifySignOut" should be a sign out button component but I always got
+    an error message on that, saying it's not exported from the ui-react library.
+
+- I've found a solution to that on this website:
+https://docs.amplify.aws/lib/auth/getting-started/q/platform/js/#option-1-use-pre-built-ui-components
+
+"The withAuthenticator is a higher-order component (HoC) that wraps Authenticator.
+You'll also notice the user and signOut are provided to the wrapped component."
+
+- App gets these 2 props (user, signOut) which can be used to implement the sign out button.
+- I added the following to Header.js:
+
+    <p>
+        Hello {email} <button onClick={signOut}>Kijelentkezés</button>
+    </p>
