@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 
 import Footer from "./component/Footer";
@@ -10,17 +10,19 @@ import History from "./component/History";
 import People from "./component/People";
 import Products from "./component/Products";
 
-const App = ({ signOut, user }) => {
+export default function App() {
     return (
-        <div className="App">
-            <Header signOut={signOut} email={user.attributes.email} />
-            <History />
-            <Products />
-            <Guarantee />
-            <People />
-            <Footer />
-        </div>
+        <Authenticator>
+            {({ signOut, user }) => (
+                <div className="App">
+                    <Header signOut={signOut} email={user.attributes.email} />
+                    <History />
+                    <Products />
+                    <Guarantee />
+                    <People />
+                    <Footer />
+                </div>
+            )}
+        </Authenticator>
     );
-};
-
-export default withAuthenticator(App);
+}
