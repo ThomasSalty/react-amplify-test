@@ -1,10 +1,27 @@
 import React from "react";
+import { Button } from "@aws-amplify/ui-react";
+
+const signOutBar = {
+    background:
+        "linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,var(--amplify-opacities-50)) 100%)",
+    fontWeight: "400",
+    margin: 0,
+    padding: "10px",
+    position: "fixed",
+    top: 0,
+    width: "100%",
+    zIndex: 2,
+};
 
 const Header = ({ signOut, email }) => {
     return (
         <>
-            <p>
-                Hello {email} <button onClick={signOut}>Kijelentkezés</button>
+            <p style={{ margin: "53px" }}></p>
+            <p style={signOutBar}>
+                Hello {email}{" "}
+                <Button variation="primary" size="default" onClick={signOut}>
+                    Kijelentkezés
+                </Button>
             </p>
 
             <header id="home" className="header">
